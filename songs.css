@@ -1,0 +1,163 @@
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background-color: #1d2c40;
+	overflow-y: hidden; 
+}
+
+
+/*Prevents the table's last line from being hidden*/
+@media screen and (max-height: 600px) {
+ 	tbody {
+ 		height: 55vh !important;
+ 	}
+ }
+
+
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  	color: #b3afad;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  	color: #b3afad;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  	color: #b3afad;
+}
+:-moz-placeholder { /* Firefox 18- */
+  	color: #b3afad;
+}
+
+
+
+tbody::-webkit-scrollbar
+{
+	width: 4px;  /* for vertical scrollbars */
+	height: 4px; /* for horizontal scrollbars */
+}
+
+tbody::-webkit-scrollbar-thumb
+{
+  	border-radius: 50px 50px 50px 50px;
+  	background-color: #ffffff;
+}
+
+
+h1 {
+	color: #b3afad;
+}
+
+.input {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: bold;
+}
+
+/*css for the inputs above the table*/
+form > input[type=text] {
+	text-indent: 3px;
+	display: inline-block;
+	width: 150px;
+}
+
+select, form > input {
+	background-color: #141414;
+	color: #b3afad;
+	border-style: solid;
+	border-color: #b3afad;
+	border-width: 1px;
+}
+
+#inputContainer {
+	padding-bottom: 30px;
+	position: relative;
+}
+
+#title, #artist, #setlist, #sortingList {
+	display: inline-block;
+	position: absolute;
+}
+
+#artist {
+	left: 180px;
+}
+
+#setlist {
+	left: 360px;
+}
+
+#sortingList {
+	right: 1px;
+}
+
+
+/*Set the width for the three containers on the site and center them*/
+#tableContainer, #inputContainer, h1{
+	display: block;
+	min-width: 725px; /*Very important this doesnt go lower. Keeps the input bars in place*/
+	margin: auto;
+	width: 80vw;
+}
+
+
+
+/*Table CSS*/
+#songTable {
+	table-layout: fixed;
+}
+
+table {
+	color: #b3afad;
+	background-color: #141414;
+	font-size: 14px;
+}
+
+tbody {
+	display: block; /*necessary to make the scroll bar show up*/
+	overflow-y: scroll;
+	overflow-x: hidden;
+	text-align: left;
+	width: 100%;
+	height: 80vh;
+}
+
+#titlesort {
+	display: block;
+	margin-left: 4px;
+}
+
+tbody > tr {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	display: block;
+	margin-left: 4px;
+	border-style: solid none none none;
+	border-width: 1px;
+}
+
+#topRow {
+	border-style: none;
+}
+
+thead {
+	border-collapse: collapse;/*extends tbody's border to fill the table*/
+	border-style: none none solid none;
+	margin-bottom: 1px;
+	font-size: 16px;
+	width: 100%;
+	text-align: left;
+}
+
+/*Is this necessary??????*/
+thead, tbody > tr, tbody > th {
+	display: table; /*Keeps table properties of everything BESIDES tbody*/
+	table-layout: fixed;
+}
+
+tbody > tr{	
+	width: 100%;
+	text-align: left;
+}
+
+tbody > th {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
