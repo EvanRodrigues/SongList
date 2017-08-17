@@ -1,5 +1,4 @@
 <?php
-
 	/*
 	 * Edits the table header based on the variabls 'dir' and 'order'
 	 * This is extremely hard coded, so I could probably improve this with a seperate function.
@@ -71,29 +70,30 @@
 		/* Must check if proper values are used */
 		if ($order != NULL) {
 			if ($order == "artist"){
-				$query = "SELECT title, artist, setlist, songDate FROM songs WHERE ? AND ? AND ? ORDER BY artist";
+				$query = "SELECT title, artist, setlist, songDate FROM songs WHERE ? AND ? AND ? ORDER BY artist LIMIT 50";
 			} 
 			else if ($order == "title") {
-				$query = "SELECT title, artist, setlist, songDate FROM songs WHERE ? AND ? AND ? ORDER BY title";
+				$query = "SELECT title, artist, setlist, songDate FROM songs WHERE ? AND ? AND ? ORDER BY title LIMIT 50";
 			} 
 			else if ($order == "date") {
-				$query = "SELECT title, artist, setlist, songDate FROM songs WHERE ? AND ? AND ? ORDER BY songDate";
+				$query = "SELECT title, artist, setlist, songDate FROM songs WHERE ? AND ? AND ? ORDER BY songDate LIMIT 50";
 			}
 			else if ($order == "setlist") {
-				$query = "SELECT title, artist, setlist, songDate FROM songs WHERE ? AND ? AND ? ORDER BY setlist";
+				$query = "SELECT title, artist, setlist, songDate FROM songs WHERE ? AND ? AND ? ORDER BY setlist LIMIT 50";
 			}
 			else {
-				$query = "SELECT title, artist, setlist, songDate FROM songs WHERE ? AND ? AND ? ORDER BY artist";
+				$query = "SELECT title, artist, setlist, songDate FROM songs WHERE ? AND ? AND ? ORDER BY artist LIMIT 50";
 			}
 			
 		}
 		else {
-			$query = "SELECT title, artist, setlist, songDate FROM songs WHERE ? AND ? AND ? ORDER BY artist";
+			$query = "SELECT title, artist, setlist, songDate FROM songs WHERE ? AND ? AND ? ORDER BY artist LIMIT 50";
 		}
 
 		/*default direction is 'ASC' so 'DESC' is the only case where appending to the end of the query is necessary.*/
 		if ($dir == 'desc') {
-			$query = $query . " DESC";
+			$query = trim($query, "LIMIT 50");
+			$query = $query . " DESC LIMIT 50";
 		}
 		
 		return $query;

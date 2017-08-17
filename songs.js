@@ -1,54 +1,104 @@
 
-/* Sends an ajax request to the server using all of the input fields that contain text.*/
-function ajaxUpdate() {
+function getDataFields() {
 	var title = $('#title').val();
 	var artist = $('#artist').val();
 	var setlist = $('#setlist').val();
-	var order = "<?php echo $_GET['order'] ?>";
-	var dir = "<?php echo $_GET['dir'] ?>";
+	var order = "";
+	var dir = "";
 
-	if ($('#titleSort').val() != "none" && $('#titleSort').val() != "" && order == "" && dir == "") {
-		console.log("titleSort: " + $('#titleSort').val());
+
+	if ($('#titleSort').val() != "none" && $('#titleSort').val() != "") {
 		order = 'title';
 		dir = $('#titleSort').val();
 	}
 
-	if ($('#artistSort').val() != "none" && $('#artistSort').val() != "" && order == "" && dir == "") {
+	if ($('#artistSort').val() != "none" && $('#artistSort').val() != "") {
 		order = 'artist';
 		dir = $('#artistSort').val();
 	}
 
-	if ($('#setlistSort').val() != "none" && $('#setlistSort').val() != "" && order == "" && dir == "") {
+	if ($('#setlistSort').val() != "none" && $('#setlistSort').val() != "") {
 		order = 'setlist';
 		dir = $('#setlistSort').val();
 	}
 
-	if ($('#dateSort').val() != "none" && $('#dateSort').val() != "" && order == "" && dir == "") {
+	if ($('#dateSort').val() != "none" && $('#dateSort').val() != "") {
 		order = 'date';
 		dir = $('#dateSort').val();
 	}
 
+
+	var output = {};
+	output['title'] = title;
+	output['artist'] = artist;
+	output['setlist'] = setlist;
+	output['order'] = order;
+	output['dir'] = dir;
+
+	return output 
+}
+
+
+
+
+function setScrollListener() {
+	var offset = 0;
+	var limit = 900 + (900 * offset);
+	/* Loads more song data when the user scrolls near the bottom. */
+	$("tbody").scroll(function() {
+		var height = $("tbody").scrollTop();
+		
+		if (height > limit) {
+			dataFields = getDataFields();
+			offset = offset + 1;
+			var sqlOffset = 50 * offset;
+			limit = 900 + (1650 * offset);
+
+			$.ajax({
+				type: "GET",
+				url: "https://doop-songs.000webhostapp.com",
+				data: {order: dataFields["order"], title: dataFields["title"], artist: dataFields["artist"], setlist: dataFields["setlist"], dir: dataFields["dir"], off: sqlOffset},
+				success: function(data) {
+					var tableContent = $(data).find('tbody').html()
+					$('tbody').append(tableContent);
+				}
+			})
+		}
+	});
+}
+
+
+
+
+
+
+/* Sends an ajax request to the server using all of the input fields that contain text.*/
+function ajaxUpdate() {
+	dataFields = getDataFields();
+
 	$.ajax({
 		type: "GET",
 		url: "https://doop-songs.000webhostapp.com",
-		data: {order: order, title: title, artist: artist, setlist: setlist, dir: dir},
+		data: {order: dataFields["order"], title: dataFields["title"], artist: dataFields["artist"], setlist: dataFields["setlist"], dir: dataFields["dir"]},
 		success: function(data) {
 			var newTable = $(data).find('#songTable').html();
 			$('#songTable').html(newTable);
-
+			
+			
 			/*Update values so we know what is being sorted for future updates*/
-			if (order == 'title') {
-				$('#titleSort').val(dir);
+			if (dataFields["order"] == 'title') {
+				$('#titleSort').val(dataFields["dir"]);
 			}
-			else if (order == 'artist') {
-				$('#artistSort').val(dir);
+			else if (dataFields["order"] == 'artist') {
+				$('#artistSort').val(dataFields["dir"]);
 			}
-			else if (order == 'setlist') {
-				$('#setlistSort').val(dir);
+			else if (dataFields["order"] == 'setlist') {
+				$('#setlistSort').val(dataFields["dir"]);
 			}
-			else if (order == 'date') {
-				$('#dateSort').val(dir);
+			else if (dataFields["order"] == 'date') {
+				$('#dateSort').val(dataFields["dir"]);
 			}
+			setScrollListener()
 		}
 	})
 }
@@ -109,7 +159,9 @@ function sort(mode) {
 		success: function(data) {
 			var newTable = $(data).find('#songTable').html();
 			$('#songTable').html(newTable);
+			setScrollListener();
 			
+
 			/*Edit the values of all columns. Apply the value/dir to the correct column. Reset all the rest*/
 			if (mode == 'title') {
 				var tempHTML = $(data).find('#titleSort').html();

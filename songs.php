@@ -54,12 +54,16 @@
 		$title = $_GET['title'];
 		$artist = $_GET['artist'];
 		$setlist = $_GET['setlist'];
+		$offset = $_GET['off'];
 
 		require_once('./SongsConnectionVars.php');
 		$connection = mysqli_connect($mysql_host, $mysql_user, $mysql_password, $mysql_database)
 			or die('connection error');
 
 		$query = setQuery($order, $dir);
+		if ($offset != NULL) {
+			$query = $query . " OFFSET " . $offset;
+		}
 		setVariables();
 
 		$prepared = mysqli_prepare($connection, $query);
@@ -73,7 +77,7 @@
   		while (mysqli_stmt_fetch($prepared) != NULL) {
 			$tempDate = date_create($myDate);
 			
-			if ($count == 0) {
+			if ($count == 0 && $offset == NULL) {
 				echo '<tr id="topRow">';
 			}
 			else {
@@ -109,6 +113,7 @@
 	setValue('#setlist', setlist);
 	setValue('#order', order);
 	setValue('#dir', dir);
+	setScrollListener();
 
 	/* Setting timers to send ajax calls when a user has finished typing in each search box. */	
 	var titleTimer = null;
