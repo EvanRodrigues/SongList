@@ -42,17 +42,29 @@ function getDataFields() {
 
 
 function setScrollListener() {
+	var delay = false;
 	var offset = 0;
-	var limit = 900 + (900 * offset);
+	var sqlOffset = 50 * offset;
+	var tableHeight = $("tbody")[0].scrollHeight - $("tbody").outerHeight();
+
 	/* Loads more song data when the user scrolls near the bottom. */
 	$("tbody").scroll(function() {
 		var height = $("tbody").scrollTop();
-		
-		if (height > limit) {
+
+		if (tableHeight - height < 50) {
+			if (delay == true) {
+				return;
+			}
+
+			/*prevents multiple ajax calls to happen at once*/
+			delay = true;
+            setTimeout(function() {
+                delay = false
+            }, 100)
+			
 			dataFields = getDataFields();
 			offset = offset + 1;
-			var sqlOffset = 50 * offset;
-			limit = 900 + (1650 * offset);
+			sqlOffset = 50 * offset;
 
 			$.ajax({
 				type: "GET",
@@ -61,6 +73,7 @@ function setScrollListener() {
 				success: function(data) {
 					var tableContent = $(data).find('tbody').html()
 					$('tbody').append(tableContent);
+					tableHeight = $("tbody")[0].scrollHeight - $("tbody").outerHeight();
 				}
 			})
 		}
