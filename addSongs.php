@@ -7,14 +7,17 @@
 	$setlist = '';
 
 	while ($line = fgets($file)) {
+		/*Finds the setlist name*/
 		if (strpos(substr($line, -3), ':') !== false) {
 			$setlist = substr($line, 0, -3);
 			echo 'setlist: ' . $setlist . '<br>';
 		}
 		else {
-			$tokens = explode(' - ', $line);
-			$title = $tokens[0];
-			$artist = $tokens[1];
+			/*Seperates the artist and title from the Clone hero file*/
+			$tokens = explode(' , ', $line);
+			$artist = $tokens[0];
+			$title = $tokens[1];
+			
 
 			if (strpos($artist, '\r') !== false) {
 				$artist = substr($tokens[1], 0, -2);

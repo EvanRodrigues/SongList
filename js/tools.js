@@ -60,7 +60,7 @@ function setScrollListener() {
 			delay = true;
             setTimeout(function() {
                 delay = false
-            }, 100)
+            }, 250)
 			
 			dataFields = getDataFields();
 			offset = offset + 1;
@@ -68,12 +68,13 @@ function setScrollListener() {
 
 			$.ajax({
 				type: "GET",
-				url: "https://doop-songs.000webhostapp.com",
+				url: "./songs.php",
 				data: {order: dataFields["order"], title: dataFields["title"], artist: dataFields["artist"], setlist: dataFields["setlist"], dir: dataFields["dir"], off: sqlOffset},
 				success: function(data) {
 					var tableContent = $(data).find('tbody').html()
 					$('tbody').append(tableContent);
 					tableHeight = $("tbody")[0].scrollHeight - $("tbody").outerHeight();
+					console.log(offset);
 				}
 			})
 		}
@@ -91,7 +92,7 @@ function ajaxUpdate() {
 
 	$.ajax({
 		type: "GET",
-		url: "https://doop-songs.000webhostapp.com",
+		url: "./songs.php",
 		data: {order: dataFields["order"], title: dataFields["title"], artist: dataFields["artist"], setlist: dataFields["setlist"], dir: dataFields["dir"]},
 		success: function(data) {
 			var newTable = $(data).find('#songTable').html();
@@ -167,7 +168,7 @@ function sort(mode) {
 
 	$.ajax({
 		type: "GET",
-		url: "https://doop-songs.000webhostapp.com",
+		url: "./songs.php",
 		data: {order: mode, title: title, artist: artist, setlist: setlist, dir: dir},
 		success: function(data) {
 			var newTable = $(data).find('#songTable').html();

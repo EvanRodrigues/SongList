@@ -1,8 +1,8 @@
 <head>
 	<meta charset="utf-8"/>
-	<link type="text/css" rel="stylesheet" href="./stylesheets/songs.css"/>
-	<script type="text/javascript" src="./tools/jquery.js"></script>
-	<script type="text/javascript" src="./songs.js"></script>
+	<link type="text/css" rel="stylesheet" href="./css/stylesheet.css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script type="text/javascript" src="./js/tools.js"></script>
 </head>
 
 <body>
