@@ -1,0 +1,22 @@
+{
+  "name": "songlist",
+  "version": "1.0.0",
+  "description": "a song list table website",
+  "main": "index.js",
+  "scripts": {
+    "sass": "node-sass -w scss/ -o css/ --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvanRodrigues/SongList.git"
+  },
+  "author": "Evan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EvanRodrigues/SongList/issues"
+  },
+  "homepage": "https://github.com/EvanRodrigues/SongList#readme",
+  "dependencies": {
+    "node-sass": "^4.12.0"
+  }
+}

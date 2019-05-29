@@ -7,6 +7,5 @@ CREATE TABLE IF NOT EXISTS songs (
 	songKey INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(50),
     artist VARCHAR(50),
-    setlist VARCHAR(50),
     songDate DATETIME
 );

@@ -1,163 +1,71 @@
-body {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	background-color: #1d2c40;
-	overflow-y: hidden; 
-}
+body, html, .container, .col {
+  background-color: #1d2c40;
+  height: 100%; }
 
+.col-6 {
+  display: none; }
 
-/*Prevents the table's last line from being hidden*/
-@media screen and (max-height: 600px) {
- 	tbody {
- 		height: 55vh !important;
- 	}
- }
+/*Header and Input CSS*/
+.header {
+  height: 7.5%; }
 
+.inputs {
+  height: 10%;
+  margin-bottom: 1%; }
 
+.header-container, .input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
 
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  	color: #b3afad;
-}
-::-moz-placeholder { /* Firefox 19+ */
-  	color: #b3afad;
-}
-:-ms-input-placeholder { /* IE 10+ */
-  	color: #b3afad;
-}
-:-moz-placeholder { /* Firefox 18- */
-  	color: #b3afad;
-}
+.page-header {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 0;
+  font-size: 5vh; }
 
-
-
-tbody::-webkit-scrollbar
-{
-	width: 4px;  /* for vertical scrollbars */
-	height: 4px; /* for horizontal scrollbars */
-}
-
-tbody::-webkit-scrollbar-thumb
-{
-  	border-radius: 50px 50px 50px 50px;
-  	background-color: #ffffff;
-}
-
-
-h1 {
-	color: #b3afad;
-}
-
-.input {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-weight: bold;
-}
-
-/*css for the inputs above the table*/
-form > input[type=text] {
-	text-indent: 3px;
-	display: inline-block;
-	width: 150px;
-}
-
-select, form > input {
-	background-color: #141414;
-	color: #b3afad;
-	border-style: solid;
-	border-color: #b3afad;
-	border-width: 1px;
-}
-
-#inputContainer {
-	padding-bottom: 30px;
-	position: relative;
-}
-
-#title, #artist, #setlist, #sortingList {
-	display: inline-block;
-	position: absolute;
-}
-
-#artist {
-	left: 180px;
-}
-
-#setlist {
-	left: 360px;
-}
-
-#sortingList {
-	right: 1px;
-}
-
-
-/*Set the width for the three containers on the site and center them*/
-#tableContainer, #inputContainer, h1{
-	display: block;
-	min-width: 725px; /*Very important this doesnt go lower. Keeps the input bars in place*/
-	margin: auto;
-	width: 80vw;
-}
-
-
+.form-control {
+  height: 2.5rem;
+  padding: 2px 6px 2px 6px; }
 
 /*Table CSS*/
-#songTable {
-	table-layout: fixed;
-}
+.table-container {
+  height: 79%;
+  margin-bottom: 0 !important; }
 
 table {
-	color: #b3afad;
-	background-color: #141414;
-	font-size: 14px;
-}
-
-tbody {
-	display: block; /*necessary to make the scroll bar show up*/
-	overflow-y: scroll;
-	overflow-x: hidden;
-	text-align: left;
-	width: 100%;
-	height: 80vh;
-}
-
-#titlesort {
-	display: block;
-	margin-left: 4px;
-}
-
-tbody > tr {
-	padding-top: 5px;
-	padding-bottom: 5px;
-	display: block;
-	margin-left: 4px;
-	border-style: solid none none none;
-	border-width: 1px;
-}
-
-#topRow {
-	border-style: none;
-}
+  box-shadow: 0 -1px 0 #454d55;
+  display: block;
+  margin-bottom: 0 !important;
+  font-size: 9.5px; }
 
 thead {
-	border-collapse: collapse;/*extends tbody's border to fill the table*/
-	border-style: none none solid none;
-	margin-bottom: 1px;
-	font-size: 16px;
-	width: 100%;
-	text-align: left;
-}
+  display: block;
+  padding-right: 0.6rem;
+  box-shadow: 0 1px 0 #454d55;
+  overflow-y: hidden; }
 
-/*Is this necessary??????*/
-thead, tbody > tr, tbody > th {
-	display: table; /*Keeps table properties of everything BESIDES tbody*/
-	table-layout: fixed;
-}
+tbody {
+  display: block;
+  width: 100% !important;
+  height: calc(100% - 40px);
+  overflow-y: scroll; }
 
-tbody > tr{	
-	width: 100%;
-	text-align: left;
-}
+.topRow {
+  border-top: none !important;
+  border-bottom: none !important; }
 
-tbody > th {
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
+tr {
+  width: 100%;
+  display: inline-table;
+  table-layout: fixed; }
+
+tbody::-webkit-scrollbar {
+  width: 0.6rem;
+  /* for vertical scrollbars */
+  height: 4px;
+  /* for horizontal scrollbars */ }
+
+tbody::-webkit-scrollbar-thumb {
+  border-radius: 50px 50px 50px 50px;
+  background-color: #ffffff; }

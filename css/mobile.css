@@ -1,0 +1,29 @@
+@media screen and (min-width: 550px) {
+  table {
+    font-size: 11.5px; }
+  .form-control {
+    height: 1.5rem; } }
+
+@media screen and (min-width: 767px) {
+  table {
+    font-size: 13px; }
+  .page-header {
+    font-size: 40px; }
+  .form-control {
+    height: 2.5rem; } }
+
+@media screen and (min-width: 850px) {
+  .table-container {
+    height: 87.5%; }
+  .header {
+    height: 5%;
+    margin-bottom: 1%; }
+  .inputs {
+    height: 2.5%;
+    margin-bottom: 1%; }
+  .form-control {
+    height: 1.5rem; }
+  .header-container {
+    justify-content: left; }
+  .col-6 {
+    display: block; } }

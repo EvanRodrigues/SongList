@@ -1,0 +1,94 @@
+$scroll-bar-width: 0.6rem;
+$thead-hight: 10px;
+
+
+body, html, .container, .col {
+    background-color: #1d2c40;
+    height: 100%;
+}
+
+.col-6 {
+    display: none;
+}
+
+
+/*Header and Input CSS*/
+.header {
+    height: 7.5%
+}
+
+.inputs {
+    height: 10%;
+    margin-bottom: 1%;
+}
+
+.header-container, .input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-header {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 0;
+    font-size: 5vh;
+}
+
+.form-control {
+    height: 2.5rem;
+    padding: 2px 6px 2px 6px;
+}
+
+
+/*Table CSS*/
+.table-container {
+    height: 79%;
+    margin-bottom: 0 !important;
+}
+
+table {
+    box-shadow: 0 -1px 0 #454d55; //border for top of thead
+    display: block;
+    margin-bottom: 0 !important;
+    font-size: 9.5px;
+}
+
+thead {
+    display: block;
+    padding-right: $scroll-bar-width;
+    box-shadow: 0 1px 0 #454d55; //border for bottom of thead
+    overflow-y: hidden;
+}
+
+tbody {
+    display: block;
+    width: 100% !important;
+    height: calc(100% - 40px);
+    overflow-y: scroll;
+}
+
+.topRow {
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+tr {
+    width: 100%;
+    display: inline-table;
+    table-layout: fixed;
+}
+
+
+//Scroll Bar CSS
+tbody::-webkit-scrollbar
+{
+	width: $scroll-bar-width;  /* for vertical scrollbars */
+	height: 4px; /* for horizontal scrollbars */
+}
+
+tbody::-webkit-scrollbar-thumb
+{
+  	border-radius: 50px 50px 50px 50px;
+  	background-color: #ffffff;
+}
