@@ -38,68 +38,70 @@
 
 	<div class="row table-container">
 		<div class="col">
-			<table class="table table-striped table-dark" id="songTable">
-				<thead>
-					<tr id="topRowContainer">
+			<div class="table-scroll">
+				<table class="table table-striped table-dark" id="songTable">
+					<thead>
+						<tr id="topRowContainer">
+						<?php
+							error_reporting(0); //turning off notices and php errors in case any of these are NULL.
+							$order = $_GET['order'];
+							$dir = $_GET['dir'];
+
+							include('./functions.php');
+							setHeader($order, $dir);//uses $order and $dir to keep the sorting links in the same state before the server call.
+						?>
+						</tr>
+					</thead>	
+
+					<tbody>
+
 					<?php
-						error_reporting(0); //turning off notices and php errors in case any of these are NULL.
-						$order = $_GET['order'];
-						$dir = $_GET['dir'];
+						$title = $_GET['title'];
+						$artist = $_GET['artist'];
+						$offset = $_GET['off'];
 
-						include('./functions.php');
-						setHeader($order, $dir);//uses $order and $dir to keep the sorting links in the same state before the server call.
+						require_once('./SongsConnectionVars.php');
+						$connection = mysqli_connect($mysql_host, $mysql_user, $mysql_password, $mysql_database)
+							or die('connection error');
+
+						$query = setQuery($order, $dir);
+						if ($offset != NULL) {
+							$query = $query . " OFFSET " . $offset;
+						}
+						setVariables();
+
+						$prepared = mysqli_prepare($connection, $query);
+						mysqli_stmt_bind_param($prepared, "ss", $title, $artist);
+						mysqli_stmt_execute($prepared);
+						mysqli_stmt_bind_result($prepared, $myTitle, $myArtist, $myDate);
+
+						echo $myTitle;
+
+						$count = 0;
+						while (mysqli_stmt_fetch($prepared) != NULL) {
+							$tempDate = date_create($myDate);
+							
+							if ($count == 0 && $offset == NULL) {
+								echo '<tr id="topRow">';
+							}
+							else {
+								echo '<tr>';
+							}
+							
+							echo '<th>' . $myTitle . '</th>';
+							echo '<th>' . $myArtist . '</th>';
+							echo '<th>' . date_format($tempDate, 'm-d-Y') . '</th>';
+							echo '</tr>';
+
+							$count = $count + 1;
+						}
+
+						mysqli_stmt_close($prepared);
+						mysqli_close($connection);
 					?>
-					</tr>
-				</thead>	
-
-				<tbody>
-
-				<?php
-					$title = $_GET['title'];
-					$artist = $_GET['artist'];
-					$offset = $_GET['off'];
-
-					require_once('./SongsConnectionVars.php');
-					$connection = mysqli_connect($mysql_host, $mysql_user, $mysql_password, $mysql_database)
-						or die('connection error');
-
-					$query = setQuery($order, $dir);
-					if ($offset != NULL) {
-						$query = $query . " OFFSET " . $offset;
-					}
-					setVariables();
-
-					$prepared = mysqli_prepare($connection, $query);
-					mysqli_stmt_bind_param($prepared, "ss", $title, $artist);
-					mysqli_stmt_execute($prepared);
-					mysqli_stmt_bind_result($prepared, $myTitle, $myArtist, $myDate);
-
-					echo $myTitle;
-
-					$count = 0;
-					while (mysqli_stmt_fetch($prepared) != NULL) {
-						$tempDate = date_create($myDate);
-						
-						if ($count == 0 && $offset == NULL) {
-							echo '<tr id="topRow">';
-						}
-						else {
-							echo '<tr>';
-						}
-						
-						echo '<th>' . $myTitle . '</th>';
-						echo '<th>' . $myArtist . '</th>';
-						echo '<th>' . date_format($tempDate, 'm-d-Y') . '</th>';
-						echo '</tr>';
-
-						$count = $count + 1;
-					}
-
-					mysqli_stmt_close($prepared);
-					mysqli_close($connection);
-				?>
-				</tbody>
-			</table>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>

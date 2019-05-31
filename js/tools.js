@@ -33,11 +33,14 @@ function setScrollListener() {
     var delay = false;
     var offset = 0;
     var sqlOffset = 50 * offset;
-    var tableHeight = $("tbody")[0].scrollHeight - $("tbody").outerHeight();
+    var scroll_div = ".table-scroll";
+
+    var tableHeight =
+        $(scroll_div)[0].scrollHeight - $(scroll_div).outerHeight();
 
     /* Loads more song data when the user scrolls near the bottom. */
-    $("tbody").scroll(function() {
-        var height = $("tbody").scrollTop();
+    $(scroll_div).scroll(function() {
+        var height = $(scroll_div).scrollTop();
 
         if (tableHeight - height < 50) {
             if (delay == true) {
@@ -48,7 +51,7 @@ function setScrollListener() {
             delay = true;
             setTimeout(function() {
                 delay = false;
-            }, 250);
+            }, 300);
 
             dataFields = getDataFields();
             offset = offset + 1;
@@ -70,8 +73,8 @@ function setScrollListener() {
                         .html();
                     $("tbody").append(tableContent);
                     tableHeight =
-                        $("tbody")[0].scrollHeight - $("tbody").outerHeight();
-                    console.log(offset);
+                        $(scroll_div)[0].scrollHeight -
+                        $(scroll_div).outerHeight();
                 }
             });
         }
