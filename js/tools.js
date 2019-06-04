@@ -38,11 +38,23 @@ function getDataFields() {
     return output;
 }
 
-$(window).resize(function() {
-    console.log("previous height: " + tableHeight);
+/*
+ * Recalculates the height of the table for the scroll bar event.
+ */
+function recalculate_height() {
     tableHeight = $(scroll_div)[0].scrollHeight - $(scroll_div).outerHeight();
-    console.log("new height: " + tableHeight);
-});
+    return tableHeight;
+}
+
+/*
+ * Scrolls to top of table.
+ * Used when the table is updated from an ajax request.
+ */
+function scroll_to_top() {
+    $(scroll_div)[0].scrollTop = 0;
+}
+
+$(window).resize(recalculate_height);
 
 function setScrollListener() {
     var delay = false;
@@ -53,7 +65,6 @@ function setScrollListener() {
     $(scroll_div).scroll(function() {
         var height = $(scroll_div).scrollTop();
 
-        console.log(tableHeight - height);
         if (tableHeight - height < 75) {
             if (delay == true) {
                 return;
@@ -120,7 +131,9 @@ function ajaxUpdate() {
             } else if (dataFields["order"] == "date") {
                 $("#dateSort").val(dataFields["dir"]);
             }
-            setScrollListener();
+
+            scroll_to_top();
+            recalculate_height();
         }
     });
 }
@@ -169,7 +182,8 @@ function sort(mode) {
                 .find("#songTable")
                 .html();
             $("#songTable").html(newTable);
-            setScrollListener();
+            scroll_to_top();
+            recalculate_height();
 
             /*Edit the values of all columns. Apply the value/dir to the correct column. Reset all the rest*/
             if (mode == "title") {
