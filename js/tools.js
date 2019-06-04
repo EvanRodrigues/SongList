@@ -1,9 +1,11 @@
 var scroll_div;
 var tableHeight;
+var offset;
 
 $(document).ready(function() {
     scroll_div = ".table-scroll";
     tableHeight = $(scroll_div)[0].scrollHeight - $(scroll_div).outerHeight();
+    offset = 0;
     setScrollListener();
 });
 
@@ -58,7 +60,6 @@ $(window).resize(recalculate_height);
 
 function setScrollListener() {
     var delay = false;
-    var offset = 0;
     var sqlOffset = 50 * offset;
 
     /* Loads more song data when the user scrolls near the bottom. */
@@ -134,6 +135,7 @@ function ajaxUpdate() {
 
             scroll_to_top();
             recalculate_height();
+            offset = 0;
         }
     });
 }
@@ -182,8 +184,6 @@ function sort(mode) {
                 .find("#songTable")
                 .html();
             $("#songTable").html(newTable);
-            scroll_to_top();
-            recalculate_height();
 
             /*Edit the values of all columns. Apply the value/dir to the correct column. Reset all the rest*/
             if (mode == "title") {
@@ -211,6 +211,10 @@ function sort(mode) {
                 $("#artistSort").val("none");
                 $("#titleSort").val("none");
             }
+
+            scroll_to_top();
+            recalculate_height();
+            offset = 0;
         }
     });
 }
