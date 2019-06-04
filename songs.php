@@ -118,7 +118,6 @@
 	setValue('#artist', artist);
 	setValue('#order', order);
 	setValue('#dir', dir);
-	setScrollListener();
 
 	/* Setting timers to send ajax calls when a user has finished typing in each search box. */	
 	var titleTimer = null;

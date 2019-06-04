@@ -1,3 +1,12 @@
+var scroll_div;
+var tableHeight;
+
+$(document).ready(function() {
+    scroll_div = ".table-scroll";
+    tableHeight = $(scroll_div)[0].scrollHeight - $(scroll_div).outerHeight();
+    setScrollListener();
+});
+
 function getDataFields() {
     var title = $("#title").val();
     var artist = $("#artist").val();
@@ -29,20 +38,23 @@ function getDataFields() {
     return output;
 }
 
+$(window).resize(function() {
+    console.log("previous height: " + tableHeight);
+    tableHeight = $(scroll_div)[0].scrollHeight - $(scroll_div).outerHeight();
+    console.log("new height: " + tableHeight);
+});
+
 function setScrollListener() {
     var delay = false;
     var offset = 0;
     var sqlOffset = 50 * offset;
-    var scroll_div = ".table-scroll";
-
-    var tableHeight =
-        $(scroll_div)[0].scrollHeight - $(scroll_div).outerHeight();
 
     /* Loads more song data when the user scrolls near the bottom. */
     $(scroll_div).scroll(function() {
         var height = $(scroll_div).scrollTop();
 
-        if (tableHeight - height < 50) {
+        console.log(tableHeight - height);
+        if (tableHeight - height < 75) {
             if (delay == true) {
                 return;
             }
