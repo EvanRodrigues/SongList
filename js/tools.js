@@ -6,6 +6,9 @@ $(document).ready(function() {
     scroll_div = ".table-scroll";
     tableHeight = $(scroll_div)[0].scrollHeight - $(scroll_div).outerHeight();
     offset = 0;
+
+    $("#topRowContainer").css("width", $("#songTable").outerWidth());
+
     setScrollListener();
 });
 
@@ -42,8 +45,11 @@ function getDataFields() {
 
 /*
  * Recalculates the height of the table for the scroll bar event.
+ * Sets the new width of the topRowContainer.
  */
 function recalculate_height() {
+    $("#topRowContainer").css("width", $("#songTable").outerWidth());
+
     tableHeight = $(scroll_div)[0].scrollHeight - $(scroll_div).outerHeight();
     return tableHeight;
 }

@@ -38,22 +38,28 @@
 
 	<div class="row table-container">
 		<div class="col">
-			<div class="table-scroll">
-				<table class="table table-striped table-dark" id="songTable">
+			<div class="table_header">
+				<table class="table table-striped table-dark">
 					<thead>
 						<tr id="topRowContainer">
-						<?php
-							error_reporting(0); //turning off notices and php errors in case any of these are NULL.
-							$order = $_GET['order'];
-							$dir = $_GET['dir'];
+							<?php
+								error_reporting(0); //turning off notices and php errors in case any of these are NULL.
+								$order = $_GET['order'];
+								$dir = $_GET['dir'];
 
-							include('./functions.php');
-							setHeader($order, $dir);//uses $order and $dir to keep the sorting links in the same state before the server call.
-						?>
+								include('./functions.php');
+								setHeader($order, $dir);//uses $order and $dir to keep the sorting links in the same state before the server call.
+							?>
 						</tr>
-					</thead>	
+					</thead>
+				</table>
+			</div>
 
-					<tbody>
+			<div class="table-scroll">
+				<table class="table table-striped table-dark" id="songTable">
+						
+
+					<tbody id="table_body">
 
 					<?php
 						$title = $_GET['title'];
