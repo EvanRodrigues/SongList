@@ -5,11 +5,13 @@
   .form-control {
     height: 1.5rem; } }
 
-@media screen and (max-height: 400px) {
+@media screen and (max-height: 411px) {
   .header {
     display: none !important; }
   .inputs {
-    height: 17.5%; } }
+    height: 17.5%; }
+  .table-scroll {
+    height: 85%; } }
 
 @media screen and (min-width: 767px) {
   table {

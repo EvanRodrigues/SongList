@@ -126,9 +126,9 @@ function ajaxUpdate() {
         },
         success: function(data) {
             var newTable = $(data)
-                .find("#songTable")
+                .find("#tableContainer")
                 .html();
-            $("#songTable").html(newTable);
+            $("#tableContainer").html(newTable);
 
             /*Update values so we know what is being sorted for future updates*/
             if (dataFields["order"] == "title") {
@@ -141,6 +141,7 @@ function ajaxUpdate() {
 
             scroll_to_top();
             recalculate_height();
+            setScrollListener();
             offset = 0;
         }
     });
@@ -187,9 +188,9 @@ function sort(mode) {
         data: { order: mode, title: title, artist: artist, dir: dir },
         success: function(data) {
             var newTable = $(data)
-                .find("#songTable")
+                .find("#tableContainer")
                 .html();
-            $("#songTable").html(newTable);
+            $("#tableContainer").html(newTable);
 
             /*Edit the values of all columns. Apply the value/dir to the correct column. Reset all the rest*/
             if (mode == "title") {
@@ -220,6 +221,7 @@ function sort(mode) {
 
             scroll_to_top();
             recalculate_height();
+            setScrollListener();
             offset = 0;
         }
     });

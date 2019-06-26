@@ -36,9 +36,9 @@
 	</div>
 	
 
-	<div class="row table-container">
+	<div class="row table-container" id="tableContainer">
 		<div class="col">
-			<div class="table_header">
+			<div class="table-header">
 				<table class="table table-striped table-dark">
 					<thead>
 						<tr id="topRowContainer">
