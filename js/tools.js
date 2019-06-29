@@ -12,6 +12,10 @@ $(document).ready(function() {
     setScrollListener();
 });
 
+/*
+ * Returns a map of all of the values for each element of the site.
+ * This includes sort category, sort direction, and both input fields.
+ */
 function getDataFields() {
     var title = $("#title").val();
     var artist = $("#artist").val();
@@ -47,7 +51,7 @@ function getDataFields() {
  * Recalculates the height of the table for the scroll bar event.
  * Sets the new width of the topRowContainer.
  */
-function recalculate_height() {
+function recalculate_dimensions() {
     $("#topRowContainer").css("width", $("#songTable").outerWidth());
 
     tableHeight = $(scroll_div)[0].scrollHeight - $(scroll_div).outerHeight();
@@ -62,8 +66,11 @@ function scroll_to_top() {
     $(scroll_div)[0].scrollTop = 0;
 }
 
-$(window).resize(recalculate_height);
+$(window).resize(recalculate_dimensions);
 
+/*
+ * Keeps track of the scrollbar and adds to the table body if the scrollbar nears the bottom of the tbody.
+ */
 function setScrollListener() {
     var delay = false;
     var sqlOffset = 50 * offset;
@@ -140,7 +147,7 @@ function ajaxUpdate() {
             }
 
             scroll_to_top();
-            recalculate_height();
+            recalculate_dimensions();
             setScrollListener();
             offset = 0;
         }
@@ -220,14 +227,14 @@ function sort(mode) {
             }
 
             scroll_to_top();
-            recalculate_height();
+            recalculate_dimensions();
             setScrollListener();
             offset = 0;
         }
     });
 }
 
-/*sets the value of an html element by finding the correct id*/
+/*Sets the value of an html element by finding the correct id*/
 function setValue(id, value) {
     if (value != null && id != "#order" && id != "#dir") {
         $(id).val(value);

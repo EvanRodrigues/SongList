@@ -4,44 +4,32 @@
 	 * This is extremely hard coded, so I could probably improve this with a seperate function.
 	 */
 	function setHeader($order, $dir) {
-		if ($order == 'title') {
-			if ($dir == "asc") {
-				echo '<th class="topRow"><div id="titleSort" value="asc">TITLE▲</div></th>';
+		$categories = array('title', 'artist', 'date');
+		$count = 0;
+
+		while($count < sizeof($categories)) {
+			if ($categories[$count] == 'date') {
+				$display = 'DATE ADDED';
 			}
 			else {
-				echo '<th class="topRow"><div id="titleSort" value="desc">TITLE▼</div></th>';
+				$display = strtoupper($categories[$count]);
 			}
 
-			echo '<th class="topRow"><div id="artistSort" value="none">ARTIST</div></th>';
-			echo '<th class="topRow"><div id="dateSort" value="none">DATE ADDED</div></th>';
-		}
-		else if ($order == 'artist') {
-			echo '<th class="topRow"><div id="titleSort" value="none">TITLE</div></th>';
+			if($order == $categories[$count]) {
+				if($dir == 'asc') {
+					$display .= '▲';
+				}
+				else {
+					$display .= '▼';
+				}
 
-			if ($dir == 'asc') {
-				echo '<th class="topRow"><div id="artistSort" value="asc">ARTIST▲</div></th>';
-			}
+				echo '<th class="topRow"><div id="' . $categories[$count] . 'Sort" value="' . $display . '">' . $display . '</div></th>';
+			}	
 			else {
-				echo '<th class="topRow"><div id="artistSort" value="asc">ARTIST▼</div></th>';
+				echo '<th class="topRow"><div id="' . $categories[$count] . 'Sort" value="none">' . $display . '</div></th>';
 			}
 
-			echo '<th class="topRow"><div id="dateSort" value="none">DATE ADDED</div></th>';
-		}
-		else if ($order == 'date') {
-			echo '<th class="topRow"><div id="titleSort" value="none">TITLE</div></th>';
-			echo '<th class="topRow"><div id="artistSort" value="none">ARTIST</div></th>';
-
-			if ($dir == 'asc') {
-				echo '<th class="topRow"><div id="dateSort" value="asc">DATE ADDED▲</div></th>';
-			}
-			else {
-				echo '<th class="topRow"><div id="dateSort" value="asc">DATE ADDED▼</div></th>';
-			}
-		}
-		else {
-			echo '<th class="topRow"><div id="titleSort" value="none">TITLE</div></th>';
-			echo '<th class="topRow"><div id="artistSort" value="none">ARTIST</div></th>';
-			echo '<th class="topRow"><div id="dateSort" value="none">DATE ADDED</div></th>';
+			$count++;
 		}
 	}
 
