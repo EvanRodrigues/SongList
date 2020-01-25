@@ -20,6 +20,5 @@ This site was developed using Bootstrap, SASS, jQuery, PHP, and mySQL.
 
 ## Future Plans
 
--   Remove duplicate songs with SQL.
 -   Improve mobile layout.
 -   Optimize PHP and JavaScript functions.
